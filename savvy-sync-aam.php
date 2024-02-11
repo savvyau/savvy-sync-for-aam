@@ -10,11 +10,15 @@
 defined('ABSPATH') or die;
 
 // Listen for our webhook trigger
-add_action('init', 'check_for_savvy_sync_webhook');
-
 function check_for_savvy_sync_webhook() {
-    // Check if our specific GET parameters are present
-    if (isset($_GET['savvy_sync_trigger']) && $_GET['savvy_sync_trigger'] == '1') {
+    // Specify the allowed IP address(es)
+    $allowed_ips = ['123.123.123.123']; // Replace this with the actual IP address(es) you expect the request to come from
+
+    // Get the IP address of the request
+    $request_ip = $_SERVER['REMOTE_ADDR'];
+
+    // Check if our specific GET parameters are present and if the request is from an allowed IP
+    if (isset($_GET['savvy_sync_trigger']) && $_GET['savvy_sync_trigger'] == '1' && in_array($request_ip, $allowed_ips)) {
         // Simple security check - replace 'your_secret_token' with a real secret token
         $token = isset($_GET['token']) ? $_GET['token'] : '';
         if ($token === 'your_secret_token') {
@@ -23,7 +27,11 @@ function check_for_savvy_sync_webhook() {
         } else {
             wp_die('Invalid token.', 'Authentication Error', array('response' => 403));
         }
+    } elseif (isset($_GET['savvy_sync_trigger']) && $_GET['savvy_sync_trigger'] == '1') {
+        // If the trigger is present but the IP address is not allowed
+        wp_die('Access denied: Your IP address is not authorized to perform this action.', 'IP Address Error', array('response' => 403));
     }
+}
 }
 
 function savvy_sync_update_db() {
