@@ -78,8 +78,8 @@ function savvy_sync_settings_page() {
     <h2>Savvy Sync Settings</h2>
     <form method="post" action="options.php">
         <?php
-            settings_fields('my-text-fetcher-settings-group');
-            do_settings_sections('my-text-fetcher-settings-group');
+            settings_fields('savvy-sync-settings-group');
+            do_settings_sections('savvy-sync-settings-group');
         ?>
         <table class="form-table">
             <tr valign="top">
@@ -107,7 +107,7 @@ add_action('admin_init', 'savvy_sync_register_settings');
 
 function savvy_sync_register_settings() {
     // Register our settings
-    register_setting('savvy-sync-settings-group', 'my_text_fetcher_remote_url');
+    register_setting('savvy-sync-settings-group', 'savvy_sync_remote_url');
     register_setting('savvy-sync-settings-group', 'savvy_sync_allowed_ip');
     register_setting('savvy-sync-settings-group', 'savvy_sync_token');
 }
