@@ -72,24 +72,28 @@ function savvy_sync_admin_menu() {
 }
 
 // Display the settings page
-function savvy_sync_settings_page() {
+function my_text_fetcher_settings_page() {
 ?>
 <div class="wrap">
-    <h2>Savvy Sync Settings</h2>
+    <h2>My Text Fetcher Settings</h2>
     <form method="post" action="options.php">
         <?php
-            settings_fields('savvy-sync-settings-group');
-            do_settings_sections('savvy-sync-settings-group');
+            settings_fields('my-text-fetcher-settings-group');
+            do_settings_sections('my-text-fetcher-settings-group');
         ?>
         <table class="form-table">
             <tr valign="top">
+                <th scope="row">Remote Text File URL</th>
+                <td><input type="text" name="my_text_fetcher_remote_url" value="<?php echo esc_attr(get_option('my_text_fetcher_remote_url')); ?>" /></td>
+            </tr>
+            <tr valign="top">
                 <th scope="row">Allowed IP Address</th>
-                <td><input type="text" name="savvy_sync_allowed_ip" value="<?php echo esc_attr(get_option('savvy_sync_allowed_ip')); ?>" /></td>
+                <td><input type="text" name="my_text_fetcher_allowed_ip" value="<?php echo esc_attr(get_option('my_text_fetcher_allowed_ip')); ?>" /></td>
             </tr>
              
             <tr valign="top">
                 <th scope="row">Token</th>
-                <td><input type="text" name="savvy_sync_token" value="<?php echo esc_attr(get_option('savvy_sync_token')); ?>" /></td>
+                <td><input type="text" name="my_text_fetcher_token" value="<?php echo esc_attr(get_option('my_text_fetcher_token')); ?>" /></td>
             </tr>
         </table>
         
