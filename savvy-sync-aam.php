@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Savvy Sync for AAM
  * Description: Syncs AAM User Settings for Savvy Solutions Client Sites
- * Version: 1.2
+ * Version: 1.2.2
  * Author: Savvy Solutions
  * Author URI: https://sync.savvysolutions.digital/
  */
@@ -72,10 +72,10 @@ function savvy_sync_admin_menu() {
 }
 
 // Display the settings page
-function my_text_fetcher_settings_page() {
+function savvy_sync_settings_page() {
 ?>
 <div class="wrap">
-    <h2>My Text Fetcher Settings</h2>
+    <h2>Savvy Sync Settings</h2>
     <form method="post" action="options.php">
         <?php
             settings_fields('my-text-fetcher-settings-group');
@@ -84,16 +84,16 @@ function my_text_fetcher_settings_page() {
         <table class="form-table">
             <tr valign="top">
                 <th scope="row">Remote Text File URL</th>
-                <td><input type="text" name="my_text_fetcher_remote_url" value="<?php echo esc_attr(get_option('my_text_fetcher_remote_url')); ?>" /></td>
+                <td><input type="text" name="savvy_sync_remote_url" value="<?php echo esc_attr(get_option('savvy_sync_remote_url')); ?>" /></td>
             </tr>
             <tr valign="top">
                 <th scope="row">Allowed IP Address</th>
-                <td><input type="text" name="my_text_fetcher_allowed_ip" value="<?php echo esc_attr(get_option('my_text_fetcher_allowed_ip')); ?>" /></td>
+                <td><input type="text" name="savvy_sync_allowed_ip" value="<?php echo esc_attr(get_option('savvy_sync_allowed_ip')); ?>" /></td>
             </tr>
              
             <tr valign="top">
                 <th scope="row">Token</th>
-                <td><input type="text" name="my_text_fetcher_token" value="<?php echo esc_attr(get_option('my_text_fetcher_token')); ?>" /></td>
+                <td><input type="text" name="savvy_sync_token" value="<?php echo esc_attr(get_option('savvy_sync_token')); ?>" /></td>
             </tr>
         </table>
         
@@ -107,6 +107,7 @@ add_action('admin_init', 'savvy_sync_register_settings');
 
 function savvy_sync_register_settings() {
     // Register our settings
+    register_setting('savvy-sync-settings-group', 'my_text_fetcher_remote_url');
     register_setting('savvy-sync-settings-group', 'savvy_sync_allowed_ip');
     register_setting('savvy-sync-settings-group', 'savvy_sync_token');
 }
